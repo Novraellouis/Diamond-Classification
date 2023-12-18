@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Uploaded Image</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* CSS sama seperti sebelumnya */
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Uploaded Image</h1>
+    <form class="upload-form" action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="file" class="form-control-file" name="file">
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    
+    <!-- Tampilkan gambar di sini -->
+    <div id="image-container">
+      <img id="uploaded-image" src="" alt="Uploaded Image" style="max-width: 100%; display: none;">
+    </div>
+  </div>
+  
+  <!-- Script untuk menampilkan gambar -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Fungsi untuk menampilkan gambar setelah diunggah
+    function previewImage(input) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        var imgElement = document.getElementById('uploaded-image');
+        imgElement.src = e.target.result;
+        imgElement.style.display = 'block';
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+
+    // Panggil fungsi previewImage saat file dipilih
+    document.querySelector('input[type=file]').addEventListener('change', function () {
+      previewImage(this);
+    });
+  </script>
+</body>
+
+</html>
